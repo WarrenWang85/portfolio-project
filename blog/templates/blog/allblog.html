@@ -37,15 +37,15 @@
   <body>
     <header>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="{% url 'home' %}">馬可將軍</a>
+  <a class="navbar-brand" href="#">馬可將軍</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ml-auto">
-      <a class="nav-item nav-link active" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="{% static '大陸期貨高手經典問答.pdf' %}">Resume</a>
-      <a class="nav-item nav-link" href="{% url 'allblogs' %}">Blog</a>
+      <a class="nav-item nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="{%  static '大陸期貨高手經典問答.pdf' %}" >Resume</a>
+      <a class="nav-item nav-link active" href="#">Blog</a>
       
     </div>
   </div>
@@ -53,38 +53,22 @@
 </header>
 
 <main role="main">
-
-  <section class="jumbotron text-center">
-    <div class="container" >
-      <h1 class="jumbotron-heading">嗨！我是馬可將軍</h1>
-      <p class="lead text-muted">This is my Django website</p>
-      <p>
-        <a href="mailto:warren.wang85@gmail.com" class="btn btn-primary my-2">Contact Me</a>
-       
-      </p>
-      <img src="{% static 'WeChat 圖片_20180501211034.jpg' %}"  height=432, width=324 />
-    </div>
-  </section>
-
-  <div class="album py-5 bg-light">
     <div class="container">
-      {% for job in jobs.all %}
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="bd-placeholder-img card-img-top" src = "{{ job.image.url }}" />
-            <div class="card-body">
-              <p class="card-text">{{ job.summary }}</p>
-              
-            </div>
-          </div>
-        </div>
+        <h1 class="text-center pt-3">Welcome to 馬可將軍's Blog</h1>
+        <br />
+        <br />
+        <h2>Latest Posts</h2>
+        <hr />
+        {% for blog in blogs.all %}
+        <a href="{% url 'detail' blog.id %}"><h3>{{ blog.title }}</h3></a>
+        
+        {{ blog.pub_date_pretty }}
+        <br/>
+        <img class="img-fluid" src="{{ blog.image.url }}" />
+        <br/>
+        <p>{{ blog.summary }}</p>
         {% endfor %}
-        </div>
-      </div>
     </div>
-  </div>
-
 </main>
 
 <footer class="text-muted">
